@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %} Edit blog post  {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+{% if user.id  ==  post.author.id %}
+<style>footer {
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+  }</style>
+
+<style> 
+  h1 {
+  background: linear-gradient( 90deg, rgba(246, 114, 128, 0.6) , rgba(255, 255, 255, 0.6));
+  border-left:20px #dd6673 solid;
+  color: #444;font-family: 'Pacifico', cursive;
+  line-height: 28px;
+  padding: 15px 0px 15px 20px;
+  text-align: center; 
+}
+.navbar{
+  background-color: crimson !important;
+}
+.nav-link{
+  font-weight: 600;
+  color:aliceblue !important;
+}
+
+</style>
+
+<br/>
+
+<h1>Update Post.......</h1>
+
+<div class="container">
+<br/><br/>
+
+<div class='form-group'>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        {{ form.media}} 
+        <button class="btn btn-secondary">Update</button>
+        </form>
+</div>
+</div>
+{% else %}
+<h3> You are not authenticated </h3>
+{% endif %}
+
+
+{% else %}
+
+You are not authenticated
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Comment on Blog Post {% endblock %}
+{% block content %}
+<style>footer {
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+  }</style>
+
+<br>
+ 
+<div class="container">
+<h1>Add Comment</h1>
+<br/><br/>
+
+<div class='form-group'>
+    <form action="" method="POST" >
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button class="btn btn-secondary">Comment</button>
+        </form>
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}

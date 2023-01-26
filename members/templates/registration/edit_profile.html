@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} Edit Profile  {% endblock %}
+{% block content %}
+
+<style>
+
+  h1 {
+    background: linear-gradient( 90deg, rgba(246, 114, 128, 0.6) , rgba(255, 255, 255, 0.6));
+    border-left:20px #dd6673 solid;
+    color: #444;font-family: 'Pacifico', cursive;
+    line-height: 28px;
+    padding: 15px 0px 15px 20px;
+    text-align: center; 
+  }
+  
+  footer {
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+  }
+    a{
+      text-decoration: none !important;
+      color: black;
+    }
+  
+  .top-right {
+      float: right;
+  background-color:blue;
+  padding: 0px 8px;
+  margin-top: 4px;
+  border-radius: 2px;
+  color: white;
+    }
+  
+    .navbar{
+      background-color: crimson !important;
+    }
+    .nav-link{
+      font-weight: 600;
+    }
+  .ccc{
+    padding-top: 20px !important;
+  }
+  
+  
+  
+    </style><br/><br/>
+    <h1>Edit Profile.......</h1>
+
+<div class="container">
+<br/><br/>
+
+{{user.profile.bio}}
+
+<div class='form-group'>
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button class="btn btn-secondary">Register</button>
+        </form>
+</div>
+</div>
+
+{% endblock %}

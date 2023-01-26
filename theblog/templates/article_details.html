@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %} {{post.title_tag}}  {% endblock %}
+
+{% block content %}
+
+
+<style>
+
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+} 
+  footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 3px;
+    background-color: black;
+    color: white;
+  }
+  
+    a{
+      text-decoration: none !important;
+      color: black;
+    }
+  
+  .top-right {
+      float: right;
+  background-color:blue;
+  padding: 0px 8px;
+  margin-top: 4px;
+  border-radius: 2px;
+  color: white;
+    }
+  
+    .navbar{
+      background-color: crimson !important;
+    }
+    .nav-link{
+      font-weight: 600;
+    }
+  .ccc{
+    padding-top: 20px !important;
+  }
+  
+  .imgs{
+    margin: auto;
+    width: 50%;
+  }
+  
+    </style>
+
+
+
+
+<br/>
+<div class="container">
+    <h1> {{post.title}} </h1>
+
+
+    <small><i style="font-size: 17px !important;" class="fa fa-user-circle-o"></i>{{post.author.first_name}}  {{post.author.last_name}} 
+        <i style="font-size: 17px !important;" class="fa fa-clock-o"></i>{{post.post_date}} 
+
+        {% if user.is_authenticated %}
+
+        {% if user.id  ==  post.author.id %}
+        -   </small><a href="{% url 'update_post' post.pk %}">Edit</a></small>  
+        |  <a href="{% url 'delete_post' post.pk %}">Delete</a>
+    {% endif %}
+
+    <br/>
+    <hr>
+    <br/>
+  
+    {{ post.body | safe }}   
+    {% comment %} safe allows you to insert html content in add post page{% endcomment %}
+    
+    {% else %}
+    <br><br/>
+    
+    <br><br>
+    
+    {{ post.body | safe }}
+    
+    
+    <br/><br/><br><br>
+
+    <form method="POST" action="{% url 'like_post' post.pk %}">
+             {% csrf_token %}
+              {% comment %} <i class="fa fa-thumbs-up" name="post_id" value="{{ post.id }}" aria-hidden="true"></i>{% endcomment %}
+       <button type="submit" name="post_id" value="{{ post.id }}"  class="btn btn-primary">like</button> 
+    </form>
+
+    <br/><br/>
+
+<h2>Comments</h2>
+{% if not post.comments.all %}
+    No comments Yet......<br> <br> <a style="background-color: burlywood;padding: 5px 10px; border-radius: 4px;" 
+    href="{% url 'add_comment' post.pk %}">Add Comment</a>
+
+{% else %}
+
+<br><a href="{% url 'add_comment' post.pk %}">Add Comment</a><br><br>
+    {% for comment in post.comments.all %}
+   <strong> {{ comment.name}} - {{comment.date_added|timesince}} </strong> <br>{{comment.body}}<br>
+    {% endfor %}
+{% endif %}
+
+    <br/><br/>
+    <a  class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+     
+</div>
+
+{% endif %}
+<br><br>
+</div></div></div>
+
+
+
+
+
+
+{% endblock %}

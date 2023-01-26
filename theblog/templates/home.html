@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} All news page{% endblock %}
+{% block content %}
+
+<style>
+
+
+  a{
+    text-decoration: none !important;
+    color: black;
+  }
+
+.top-right {
+    float: right;
+background-color:blue;
+padding: 0px 8px;
+margin-top: 4px;
+border-radius: 2px;
+color: white;
+  }
+
+  .navbar{
+    background-color: crimson !important;
+  }
+  .nav-link{
+    font-weight: 600;
+    color:aliceblue !important;
+  }
+.ccc{
+  padding-top: 20px !important;
+}
+#homeimg{
+  height: 13rem !important;
+  width: 14rem !important;;
+}
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: black;
+  color: white;
+}
+h1 {
+  background: linear-gradient( 90deg, rgba(246, 114, 128, 0.6) , rgba(255, 255, 255, 0.6));
+  border-left:20px #dd6673 solid;
+  color: #444;font-family: 'Pacifico', cursive;
+  line-height: 28px;
+  padding: 15px 0px 15px 20px;
+  text-align: center; 
+}
+.gg{
+ 
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .gh {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+    font-size: 14px;
+  }
+
+
+
+  </style>
+  <marquee width="80%" direction="left" height="30px" style="padding: 10px 0px !important;font-size: 14px;font-weight: 600;">
+    Your number one news blog site in Ghana
+     </marquee>
+<br/>  
+  <h1> Posts </h1>
+  <br/>  
+
+
+
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9" >
+            <div class="container-fluid">
+                <div class="row">
+                    {% for post in object_list %}
+                    <div class="col-12 col-md-12 col-lg-6 col-sm-12 mb-4">
+                    <div class="card">
+                        <div class="row ">
+                          <div class="col-md-4">
+                            <a href="{% url 'article-detail' post.pk %}">   
+                              <img id="homeimg" src=" {{ post.header_image.url }}" class="w-100"></a>
+                            </div>
+                            <div class="col-md-8 px-3">
+                             <div class="card-block px-3">
+                                <div class="up">
+                                  <a href="{% url 'category' post.category %}"><p class="top-right ">{{post.category}}</p></a> </div><br>
+                                <a href="{% url 'article-detail' post.pk %}"> 
+                                <h4 class="card-title" style="padding-top: 2px;">{{post.title}}</h4>
+                                <p class="card-text">{{post.snippet}}</p></a>
+                                <div>
+                               <p class="ccc"> <span class="gh" style="color: black;text-decoration: none;">  {{post.post_date|timesince}}</span><span class="gg"><small>By:</small> {{ post.author.first_name}} 
+                                {{ post.author.last_name}}</span></p>
+                              </div>  
+                              </div>
+                            </div>
+                  
+                          </div>
+                        </div>
+                      </div> {% endfor %}
+                  
+                 
+                </div>
+              </div>
+          </div>
+      <div class="col-sm-3 g-0 side">
+        <div class="card" style="width: 18rem;" id="side">
+            <img src="https://images.unsplash.com/photo-1612383401597-cdfb8bdfa0d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZGFyayUyMGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <a href="#"  class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+    
+
+  <br><br>
+
+{% endblock %}

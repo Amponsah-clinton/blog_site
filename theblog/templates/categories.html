@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %} Category{% endblock %}
+{% block content %}
+
+
+<style>    
+  @import url('https://fonts.googleapis.com/css?family=Pacifico');
+
+a{
+  text-decoration: none !important;
+  color: black;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} 
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 3px;
+  background-color: black;
+  color: white;
+}
+#homeimg{
+  height: 18rem !important;
+}
+
+.navbar{
+  background-color: crimson !important;
+}
+.nav-link{
+  font-weight: 600;
+}
+.ccc{
+padding-top: 20px !important;
+}
+h1 {
+  background: linear-gradient( 90deg, rgba(246, 114, 128, 0.6) , rgba(255, 255, 255, 0.6));
+  border-left:20px #dd6673 solid;
+  color: #444;font-family: 'Pacifico', cursive;
+  line-height: 28px;
+  padding: 15px 0px 15px 20px; 
+}
+
+</style>
+
+
+
+<br><br>
+
+{% if category_posts %}
+ <h1 style="text-align: center;"> {{cats}}</h1><br><br>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-9" >
+          <div class="container-fluid">
+              <div class="row">
+                  {% for post in category_posts %}
+                  <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3 col-6">
+                    <div class="card">
+                      <a href="{% url 'article-detail' post.pk %}">   <img id="homeimg" src=" {{ post.header_image.url }}" class="w-100"></a>
+                      <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a></h5>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-muted">  <i style="font-size: 13px !important;" class="fa fa-clock-o"></i>{{post.post_date.date}}</small>
+                      <span style="float: right; font-size: 12px; padding-top: 3px;font-weight: 500;"><i style="font-size: 13px !important;" class="fa fa-user-circle-o"></i>{{ post.author.first_name}} {{ post.author.last_name}}</span>  
+                      </div>
+                      </div>
+                    </div> {% endfor %}
+                    {% endif %}
+               
+              </div>
+            </div>
+        </div>
+    <div class="col-sm-3 g-0 side">
+      <div class="card" style="width: 18rem;" id="side">
+          <img src="https://images.unsplash.com/photo-1612383401597-cdfb8bdfa0d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8ZGFyayUyMGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <a href="#"  class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+
+{% endblock %}

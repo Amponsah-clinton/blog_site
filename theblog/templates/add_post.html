@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %} Create a new blog post  {% endblock %}
+{% block content %}
+<style>    
+    a{
+      text-decoration: none !important;
+      color: black;
+    }
+    footer {
+      text-align: center;
+      padding: 3px;
+      background-color: black;
+      color: white;
+    }
+    .navbar{
+      background-color: crimson !important;
+    }
+    .nav-link{
+      font-weight: 600;
+    }
+    .ccc{
+    padding-top: 20px !important;
+    }
+    h1 {
+      background: linear-gradient( 90deg, rgba(246, 114, 128, 0.6) , rgba(255, 255, 255, 0.6));
+      border-left:20px #dd6673 solid;
+      color: #444;font-family: 'Pacifico', cursive;
+      line-height: 28px;
+      padding: 15px 0px 15px 20px;
+      text-align: center; 
+    }
+    </style>
+    
+ <br> <br>
+{% if user.is_authenticated %}
+<h1>Add Post.......</h1>
+<div class="container">
+
+<br/><br/>
+
+<div class='form-group'>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        {{ form.media}}   
+        {% comment %} add ckeditor {% endcomment %}
+        <button class="btn btn-secondary">Post</button>
+        </form>
+</div>
+</div>
+<br> <br>
+<script>
+    var name = '{{user.id}}';
+    document.getElementById('elder').value = name; 
+</script>
+
+
+
+
+{% else %}
+
+You are not authenticated
+
+{% endif %}
+{% endblock %}
